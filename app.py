@@ -66,9 +66,6 @@ class Artist(db.Model):
     image_link = db.Column(db.String(500))
     shows = db.relationship('Show', backref="artist")
 
-    
-
- 
 
 class Show(db.Model):
     __tablename__ = 'Shows'
@@ -135,15 +132,6 @@ def venues():
 
 @app.route('/venues/search', methods=['POST'])
 def search_venues():
-
-  response={
-    "count": 1,
-    "data": [{
-      "id": 2,
-      "name": "The Dueling Pianos Bar",
-      "num_upcoming_shows": 0,
-    }]
-  }
 
   search_term = request.form.get('search_term')
   results = Venue.query.filter(Venue.name.ilike(f'%{search_term}%')).all()
